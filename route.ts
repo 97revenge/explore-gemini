@@ -1,0 +1,1 @@
+export const approvedRoute = ["/chat/github", "/chat/math"]
