@@ -6,13 +6,13 @@ export default function Page({
   params,
 }: {
   params: {
-    slug: 'github'
+    slug: 'github' | 'math'
   }
 }) {
   return (
     <>
       <div className="">
-        <ChatContainer />
+        <ChatContainer slug={params.slug} />
       </div>
     </>
   )
