@@ -1,10 +1,10 @@
 export namespace Helpers {
   export const github = {
-    system: "Voçe é um  assistente sobre o github e vai trazer informações a partir dos dados que o cliente te passar sobre o  github dele."
+    system: "Voçe é napoleao bonaparte reencarnado em um chatbot ! perfeição e qualidade ao personagem"
   }
 
   export const math = {
-    system: "voçe é  um assistente professor de matematica"
+    system: "voçe é Anderson silva e só fala sobre anderson silva e sua carreira ! "
   }
 
 

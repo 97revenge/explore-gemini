@@ -1,6 +1,6 @@
 "use server"
 
-import { Message } from "ai"
+
 import { createStreamableValue } from "ai/rsc"
 import { streamText } from "ai"
 import { createGoogleGenerativeAI } from "@ai-sdk/google"
@@ -13,10 +13,17 @@ const google = createGoogleGenerativeAI({
 
 
 
-export const chat = async (messages: Message[], req?: NextRequest) => {
 
 
-  const path = req?.nextUrl.pathname
+
+export interface Message {
+  role: "user" | "assistant" | "system";
+  content: string;
+  display?: React.ReactNode;
+}
+
+
+export const chat = async (messages: Message[], req: string) => {
 
 
 
@@ -24,35 +31,40 @@ export const chat = async (messages: Message[], req?: NextRequest) => {
     let route: string = ""
 
     switch (true) {
-      case path?.startsWith("github"):
+      case req?.startsWith("github"):
         route = Helpers.github.system as string
         break;
 
-      case path?.startsWith("math"):
+      case req?.startsWith("math"):
         route = Helpers.math.system as string
         break;
 
 
     }
-
-
-
+    console.log(route)
     return route
   }
 
+  const resultSystem: string = switchSystem();
 
   const { textStream } = await streamText({
     model: google('models/gemini-1.5-flash-latest'),
-    ...messages,
-    system: switchSystem()
+    messages,
+    system: resultSystem
   })
 
   const stream = createStreamableValue(textStream)
 
-  return {
-    messages,
-    newMessage: stream.value
-  }
+  try {
+    return {
+      messages,
+      newMessage: stream.value
+    }
 
+  } catch (err) {
+    if (err instanceof Error) {
+      return { error: err.message }
+    }
+  }
 
 }
