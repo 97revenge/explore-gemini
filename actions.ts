@@ -3,7 +3,7 @@
 import { createAI } from "ai/rsc";
 
 import { Message } from "ai"
-import { chat } from "./app/chat/actions";
+import { chat } from "@/app/chat/actions";
 
 export interface ServerMessage extends Message {
 
