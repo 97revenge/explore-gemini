@@ -32,7 +32,6 @@ export const ConversacionalChat = () => {
     setInput("");
 
     for await (const chunk of readStreamableValue(newMessage)) {
-      alert(JSON.stringify(display));
       let textContent = `${newMessage}${chunk}`;
       setConversation([
         ...messages,

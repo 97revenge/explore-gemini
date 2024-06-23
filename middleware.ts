@@ -1,9 +1,13 @@
 import { NextRequest, NextResponse } from "next/server"
 import { approvedRoute } from "./route";
+import { prisma } from "./lib/orm/prisma";
 
 
 
 export default async function middleware(request: NextRequest) {
+
+
+
 
   const { nextUrl } = request
 
