@@ -4,32 +4,37 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { SendIcon } from "lucide-react";
 import { useActions, readStreamableValue } from "ai/rsc";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Message } from "@/app/chat/actions";
 import { usePathname } from "next/navigation";
 
 import Markdown from "react-markdown";
+import { Helpers } from "@/lib/Helpers";
+
+const approvedRoute = ["github", "math"];
 
 export const ConversacionalChat = () => {
   const { chat } = useActions();
 
   const params = usePathname().split("/")[2];
 
-  const [conversation, setConversation] = useState<Message[]>([]);
+  const [conversation, setConversation] = useState<Message[]>([
+    {
+      role: "system",
+      content: `${Helpers[params].history}`,
+    },
+  ]);
+
   const [input, setInput] = useState<string>("");
 
+  const callbackInput = useCallback(() => setInput(""), []);
   const handler = async () => {
     const { messages, newMessage, err, display } = await chat(
       [...conversation, { role: "user", content: input }],
       params
     );
 
-    if (err) {
-      alert("erro !!! ");
-      console.log(err);
-    }
-
-    setInput("");
+    callbackInput();
 
     for await (const chunk of readStreamableValue(newMessage)) {
       let textContent = `${newMessage}${chunk}`;
