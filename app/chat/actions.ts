@@ -6,7 +6,6 @@ import z from "zod"
 import { createStreamableValue, createStreamableUI } from "ai/rsc";
 import { CoreTool, generateText, streamText } from "ai";
 import { createGoogleGenerativeAI } from "@ai-sdk/google";
-import { Helpers } from "@/lib/Helpers";
 import { routeConfig } from '@/route';
 
 const approvedRoute = ["github", "math"]
