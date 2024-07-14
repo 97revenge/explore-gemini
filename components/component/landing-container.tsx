@@ -25,11 +25,17 @@ import {
   RocketIcon,
   DollarSignIcon,
   FileQuestionIcon,
+  FootprintsIcon,
+  MoonIcon,
+  SunIcon,
+  UmbrellaIcon,
 } from "lucide-react";
 
 import { wx, W } from "windstitch";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useThemeContext } from "@/lib/providers/theme";
+import { DropdownTheme } from "./dropdown-theme";
+import { DropdownMenuItem } from "../ui/dropdown-menu";
 
 const callBackTheme = (theme: string) => {
   const content = wx({
@@ -45,6 +51,7 @@ const callBackTheme = (theme: string) => {
   });
 };
 
+import { getCookies, getCookie } from "cookies-next";
 export const styles: { [key: string]: string } = {
   vanilla: callBackTheme(
     "bg-white transition-all ransition-colors  flex flex-col min-h-dvh bg-background px-6"
@@ -61,11 +68,60 @@ export const styles: { [key: string]: string } = {
 };
 
 export function LandingContainer() {
+  const [main, setMain] = useState<string>("");
   const { theme, switchTheme } = useThemeContext();
 
+  useEffect(() => {
+    const _theme = getCookie("theme");
+
+    setMain(String(_theme));
+
+    // alert(JSON.stringify(_theme));
+  }, [switchTheme]);
+
   return (
-    <div className={styles[theme]}>
+    <div className={styles[main]}>
       <header className="px-4 lg:px-6 h-14 flex items-center border-b">
+        <div className="w-[100px]">
+          <DropdownTheme>
+            <DropdownMenuItem>
+              <Button
+                onClick={() => switchTheme("vanilla")}
+                className="flex items-center gap-2"
+              >
+                <SunIcon className="h-5 w-5" />
+                <span>Vanilla</span>
+              </Button>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <Button
+                onClick={() => switchTheme("midnight")}
+                className="flex items-center gap-2"
+              >
+                <MoonIcon className="h-5 w-5" />
+                <span>Midnight</span>
+              </Button>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <Button
+                onClick={() => switchTheme("tropical")}
+                className="flex items-center gap-2"
+              >
+                <UmbrellaIcon className="h-5 w-5" />
+                <span>Tropical</span>
+              </Button>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <Button
+                onClick={() => switchTheme("streets")}
+                className="flex items-center gap-2"
+              >
+                <FootprintsIcon className="h-5 w-5" />
+                <span>Streets</span>
+              </Button>
+            </DropdownMenuItem>
+          </DropdownTheme>
+        </div>
         <Link
           href="#"
           className="flex items-center justify-center"

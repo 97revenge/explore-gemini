@@ -1,8 +1,14 @@
 "use client";
 
 import React, { createContext, useState, ReactNode, useContext } from "react";
+import {
+  getCookies,
+  setCookie,
+  hasCookie,
+  deleteCookie,
+  getCookie,
+} from "cookies-next";
 
-// Define the shape of the context
 interface ThemeContextType {
   theme: string;
   switchTheme: (newTheme: string) => void;
@@ -11,10 +17,12 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-  const [theme, setTheme] = useState<string>("vanilla");
+  const _theme = (getCookie("theme") as string) || "default"; // provide a default value
+  const [theme, setTheme] = useState<string>(_theme);
 
   const switchTheme = (newTheme: string) => {
     setTheme(newTheme);
+    setCookie("theme", newTheme);
   };
 
   return (
