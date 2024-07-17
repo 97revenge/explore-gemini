@@ -4,7 +4,6 @@ import Link from "next/link";
 import {
   Card,
   CardHeader,
-  CardTitle,
   CardDescription,
   CardContent,
   CardFooter,
@@ -31,56 +30,25 @@ import {
   UmbrellaIcon,
 } from "lucide-react";
 
-import { wx, W } from "windstitch";
-import { useContext, useEffect, useState } from "react";
 import { useThemeContext } from "@/lib/providers/theme";
 import { DropdownTheme } from "./dropdown-theme";
 import { DropdownMenuItem } from "../ui/dropdown-menu";
-
-const callBackTheme = (theme: string) => {
-  const content = wx({
-    variants: {
-      themes: {
-        theme,
-      },
-    },
-  });
-
-  return content({
-    themes: "theme",
-  });
-};
-
-import { getCookies, getCookie } from "cookies-next";
-export const styles: { [key: string]: string } = {
-  vanilla: callBackTheme(
-    "bg-white transition-all ransition-colors  flex flex-col min-h-dvh bg-background px-6"
-  ),
-  midnight: callBackTheme(
-    "bg-black transition-all ransition-colors  flex flex-col min-h-dvh bg-background px-6"
-  ),
-  tropical: callBackTheme(
-    "bg-yellow-500 transition-all ransition-colors  flex flex-col min-h-dvh bg-background px-6"
-  ),
-  streets: callBackTheme(
-    "bg-gray-500 transition-all ransition-colors  flex flex-col min-h-dvh bg-background px-6"
-  ),
-};
+import { LayoutContainer as Container } from "../Layouts/LayoutContainer";
+import { HeaderAnchor } from "../Anchor/HeaderAnchor";
+import { OptionsAnchor as Options } from "../Anchor/OptionsAnchor";
+import { IntroTitle } from "../Titles/IntroTitle";
+import { IntroParagraph } from "../Paragraph/IntroParagraph";
+import { CardTopic } from "../Topics/CardTopic";
+import { PrimaryCard } from "../Cards/PrimaryCard";
+import { CardTitle } from "../Titles/CardTitle";
+import { SVGProps } from "react";
+import { IceBreaker } from "./ice-breaker";
 
 export function LandingContainer() {
-  const [main, setMain] = useState<string>("");
   const { theme, switchTheme } = useThemeContext();
 
-  useEffect(() => {
-    const _theme = getCookie("theme");
-
-    setMain(String(_theme));
-
-    // alert(JSON.stringify(_theme));
-  }, [switchTheme]);
-
   return (
-    <div className={styles[main]}>
+    <Container>
       <header className="px-4 lg:px-6 h-14 flex items-center border-b">
         <div className="w-[100px]">
           <DropdownTheme>
@@ -122,182 +90,73 @@ export function LandingContainer() {
             </DropdownMenuItem>
           </DropdownTheme>
         </div>
-        <Link
-          href="#"
-          className="flex items-center justify-center"
-          prefetch={false}
-        >
-          <AnvilIcon className="size-6" />
-          <span className="sr-only">Gemini AI</span>
-        </Link>
+        <HeaderAnchor />
         <nav className="ml-auto flex gap-4 sm:gap-6">
-          <Link
-            href="#"
-            className="text-sm font-medium hover:underline underline-offset-4"
-            prefetch={false}
-          >
-            Models
-          </Link>
-          <Link
-            href="#"
-            className="text-sm font-medium hover:underline underline-offset-4"
-            prefetch={false}
-          >
-            Pricing
-          </Link>
-          <Link
-            href="#"
-            className="text-sm font-medium hover:underline underline-offset-4"
-            prefetch={false}
-          >
-            About
-          </Link>
-          <Link
-            href="#"
-            className="text-sm font-medium hover:underline underline-offset-4"
-            prefetch={false}
-          >
-            Contact
-          </Link>
+          <Options>Models</Options>
+          <Options>Pricing</Options>
+          <Options>About</Options>
+          <Options>Contact</Options>
         </nav>
       </header>
       <main className="flex-1">
         <section className="w-full py-12 md:py-24 lg:py-32">
           <div className="container px-4 md:px-6 space-y-8">
             <div className="text-center space-y-4">
-              <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
-                Unlock the Power of Gemini 1.5 AI Models
-              </h1>
-              <p className="max-w-[700px] mx-auto text-muted-foreground md:text-xl">
-                Discover the next generation of AI-powered solutions that
-                revolutionize your business.
-              </p>
+              <IntroTitle>
+                Personalize a Gemini com instruções e habilidades em um
+                assistente só !
+              </IntroTitle>
+              <IntroParagraph>
+                Descubra e crie versões personalizadas do ChatGPT que combinam
+                instruções, conhecimento extra e qualquer combinação de
+                habilidades
+              </IntroParagraph>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <Card className="bg-card text-card-foreground shadow-md hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <CardTitle>
-                    <CpuIcon className="mr-2 inline-block h-6 w-6 text-themes" />
-                    Gemini 1.5 GPT
-                  </CardTitle>
-                  <CardDescription>
-                    Advanced language processing for intelligent communication.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-2 text-muted-foreground">
-                    <div className="flex items-center gap-2">
-                      <CheckIcon className="inline-block h-4 w-4 text-themes" />
-                      <span>
-                        Contextual understanding and natural language generation
-                      </span>
+              <div className="w-full max-w-[350px]">
+                <PrimaryCard>
+                  <CardHeader>
+                    <PhMathOperationsDuotone />
+                    <CardTitle>Matemática</CardTitle>
+                    <CardDescription>
+                      <CardTopic>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Soluta minus illo quae, voluptate veniam ex a aliquam.
+                        Perspiciatis nesciunt delectus debitis alias neque
+                        dolorem culpa perferendis, soluta placeat rem ipsa!
+                      </CardTopic>
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-2 mb-4 text-muted-foreground ">
+                      <div className="flex items-center gap-2">
+                        <CheckIcon className="inline-block h-4 w-6 text-themes current fill text-green-400  " />
+                        <CardTopic>
+                          Lorem ipsum dolor sit amet consectetur adipisicing
+                          elit.
+                        </CardTopic>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <CheckIcon className="inline-block h-4 w-6 text-themes current fill text-green-400  " />
+                        <CardTopic>
+                          Lorem ipsum dolor sit amet consectetur adipisicing
+                          elit.
+                        </CardTopic>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <CheckIcon className="inline-block h-4 w-6 text-themes current fill text-green-400  " />
+                        <CardTopic>
+                          Lorem ipsum dolor sit amet consectetur adipisicing
+                          elit.
+                        </CardTopic>
+                      </div>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <CheckIcon className="inline-block h-4 w-4 text-themes" />
-                      <span>Multilingual support for global communication</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <CheckIcon className="inline-block h-4 w-4 text-themes" />
-                      <span>Customizable for domain-specific applications</span>
-                    </div>
-                  </div>
-                </CardContent>
-                <CardFooter>
-                  <Button size="sm">Learn More</Button>
-                </CardFooter>
-              </Card>
-              <Card className="bg-card text-card-foreground shadow-md hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <CardTitle>
-                    <LayersIcon className="mr-2 inline-block h-6 w-6 text-themes" />
-                    Gemini 1.5 Vision
-                  </CardTitle>
-                  <CardDescription>
-                    Powerful computer vision for intelligent image analysis.
-                  </CardDescription>
-                  <div className="mt-4 grid grid-cols-2 gap-4">
-                    <div className="bg-muted rounded-md p-3 flex items-center justify-center">
-                      <DotIcon className="w-6 h-6 text-themes-foreground" />
-                      <span className="text-sm font-medium">
-                        Object Detection
-                      </span>
-                    </div>
-                    <div className="bg-muted rounded-md p-3 flex items-center justify-center">
-                      <SectionIcon className="w-6 h-6 text-themes-foreground" />
-                      <span className="text-sm font-medium">
-                        Image Segmentation
-                      </span>
-                    </div>
-                    <div className="bg-muted rounded-md p-3 flex items-center justify-center">
-                      <CodeIcon className="w-6 h-6 text-themes-foreground" />
-                      <span className="text-sm font-medium">
-                        Image Classification
-                      </span>
-                    </div>
-                    <div className="bg-muted rounded-md p-3 flex items-center justify-center">
-                      <SettingsIcon className="w-6 h-6 text-themes-foreground" />
-                      <span className="text-sm font-medium">
-                        Scene Understanding
-                      </span>
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-2 text-muted-foreground">
-                    <div className="flex items-center gap-2">
-                      <CheckIcon className="inline-block h-4 w-4 text-themes" />
-                      <span>Object detection and classification</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <CheckIcon className="inline-block h-4 w-4 text-themes" />
-                      <span>Image segmentation and scene understanding</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <CheckIcon className="inline-block h-4 w-4 text-themes" />
-                      <span>Customizable for industry-specific use cases</span>
-                    </div>
-                  </div>
-                </CardContent>
-                <CardFooter>
-                  <Button size="sm">Learn More</Button>
-                </CardFooter>
-              </Card>
-              <Card className="bg-card text-card-foreground shadow-md hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <CardTitle>
-                    <SettingsIcon className="mr-2 inline-block h-6 w-6 text-themes" />
-                    Gemini 1.5 Multimodal
-                  </CardTitle>
-                  <CardDescription>
-                    Integrated AI for seamless cross-domain intelligence.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-2 text-muted-foreground">
-                    <div className="flex items-center gap-2">
-                      <CheckIcon className="inline-block h-4 w-4 text-themes" />
-                      <span>
-                        Combines language, vision, and other modalities
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <CheckIcon className="inline-block h-4 w-4 text-themes" />
-                      <span>
-                        Enables advanced reasoning and decision-making
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <CheckIcon className="inline-block h-4 w-4 text-themes" />
-                      <span>
-                        Customizable for complex enterprise applications
-                      </span>
-                    </div>
-                  </div>
-                </CardContent>
-                <CardFooter>
-                  <Button size="sm">Learn More</Button>
-                </CardFooter>
-              </Card>
+                  </CardContent>
+                  <CardFooter>
+                    <Button size="sm">Learn More</Button>
+                  </CardFooter>
+                </PrimaryCard>
+              </div>
             </div>
           </div>
         </section>
@@ -600,6 +459,26 @@ export function LandingContainer() {
           </Link>
         </nav>
       </footer>
-    </div>
+    </Container>
+  );
+}
+
+export function PhMathOperationsDuotone(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="2em"
+      height="2em"
+      viewBox="0 0 256 256"
+      {...props}
+    >
+      <g fill="currentColor">
+        <path
+          d="M216 56v144a16 16 0 0 1-16 16H56a16 16 0 0 1-16-16V56a16 16 0 0 1 16-16h144a16 16 0 0 1 16 16"
+          opacity=".2"
+        ></path>
+        <path d="M112 72a8 8 0 0 1-8 8H40a8 8 0 0 1 0-16h64a8 8 0 0 1 8 8m-8 104H80v-24a8 8 0 0 0-16 0v24H40a8 8 0 0 0 0 16h24v24a8 8 0 0 0 16 0v-24h24a8 8 0 0 0 0-16m48 0h64a8 8 0 0 0 0-16h-64a8 8 0 0 0 0 16m64 16h-64a8 8 0 0 0 0 16h64a8 8 0 0 0 0-16m-61.66-90.34a8 8 0 0 0 11.32 0L184 83.31l18.34 18.35a8 8 0 0 0 11.32-11.32L195.31 72l18.35-18.34a8 8 0 0 0-11.32-11.32L184 60.69l-18.34-18.35a8 8 0 0 0-11.32 11.32L172.69 72l-18.35 18.34a8 8 0 0 0 0 11.32"></path>
+      </g>
+    </svg>
   );
 }

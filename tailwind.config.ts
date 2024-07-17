@@ -53,7 +53,13 @@ export default {
         md: `calc(var(--radius) - 2px)`,
         sm: `calc(var(--radius) - 4px)`
       },
+
       keyframes: {
+        "flip": {
+          "to": {
+            "transform": "rotate(360deg)"
+          }
+        },
         "accordion-down": {
           from: { height: 0 },
           to: { height: "var(--radix-accordion-content-height)" }
@@ -65,7 +71,10 @@ export default {
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out"
+        "accordion-up": "accordion-up 0.2s ease-out",
+        "flip": "flip 6s infinite steps(2, end)",
+        "rotate": "rotate 3s linear infinite both"
+
       },
     },
   },

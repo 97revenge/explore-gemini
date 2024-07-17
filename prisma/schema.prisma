@@ -18,3 +18,25 @@ model Helper {
   id     String @id @default(cuid())
   system String
 }
+
+model Card {
+  id     String @id @default(cuid())
+  title  String
+  author String
+
+  description String
+
+  topics Topic[]
+
+  @@map("card")
+}
+
+model Topic {
+  id      String @id @default(cuid())
+  content String
+
+  Card   Card?   @relation(fields: [cardId], references: [id])
+  cardId String?
+
+  @@map("topic")
+}

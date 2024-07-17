@@ -6,35 +6,20 @@
 
 /** Add fonts into your Next.js project:
 
-import { Libre_Franklin } from 'next/font/google'
-import { Chivo } from 'next/font/google'
 
-libre_franklin({
-  subsets: ['latin'],
-  display: 'swap',
-})
-
-chivo({
-  subsets: ['latin'],
-  display: 'swap',
-})
-
-To read more about using these font, please visit the Next.js documentation:
-- App Directory: https://nextjs.org/docs/app/building-your-application/optimizing/fonts
-- Pages Directory: https://nextjs.org/docs/pages/building-your-application/optimizing/fonts
 **/
-import { Button } from '@/components/ui/button'
-import Link from 'next/link'
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import {
   DropdownMenuTrigger,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuContent,
   DropdownMenu,
-} from '@/components/ui/dropdown-menu'
-import { AvatarImage, AvatarFallback, Avatar } from '@/components/ui/avatar'
-import { Textarea } from '@/components/ui/textarea'
-import { JSX, SVGProps } from 'react'
+} from "@/components/ui/dropdown-menu";
+import { AvatarImage, AvatarFallback, Avatar } from "@/components/ui/avatar";
+import { Textarea } from "@/components/ui/textarea";
+import { JSX, SVGProps } from "react";
 
 export function ChatComponent() {
   return (
@@ -254,7 +239,7 @@ export function ChatComponent() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 function ArrowUpIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
@@ -274,7 +259,7 @@ function ArrowUpIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
       <path d="m5 12 7-7 7 7" />
       <path d="M12 19V5" />
     </svg>
-  )
+  );
 }
 
 function BotIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
@@ -298,11 +283,11 @@ function BotIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
       <path d="M15 13v2" />
       <path d="M9 13v2" />
     </svg>
-  )
+  );
 }
 
 function ChevronDownIcon(
-  props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>,
+  props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>
 ) {
   return (
     <svg
@@ -319,11 +304,11 @@ function ChevronDownIcon(
     >
       <path d="m6 9 6 6 6-6" />
     </svg>
-  )
+  );
 }
 
 function ClipboardIcon(
-  props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>,
+  props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>
 ) {
   return (
     <svg
@@ -341,7 +326,7 @@ function ClipboardIcon(
       <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
       <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
     </svg>
-  )
+  );
 }
 
 function PenIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
@@ -360,11 +345,11 @@ function PenIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
     >
       <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
     </svg>
-  )
+  );
 }
 
 function RefreshCcwIcon(
-  props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>,
+  props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>
 ) {
   return (
     <svg
@@ -384,7 +369,7 @@ function RefreshCcwIcon(
       <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16" />
       <path d="M16 16h5v5" />
     </svg>
-  )
+  );
 }
 
 function SparkleIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
@@ -403,11 +388,11 @@ function SparkleIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
     >
       <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z" />
     </svg>
-  )
+  );
 }
 
 function ThumbsDownIcon(
-  props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>,
+  props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>
 ) {
   return (
     <svg
@@ -425,11 +410,11 @@ function ThumbsDownIcon(
       <path d="M17 14V2" />
       <path d="M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L12 22h0a3.13 3.13 0 0 1-3-3.88Z" />
     </svg>
-  )
+  );
 }
 
 function ThumbsUpIcon(
-  props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>,
+  props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>
 ) {
   return (
     <svg
@@ -447,7 +432,7 @@ function ThumbsUpIcon(
       <path d="M7 10v12" />
       <path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2h0a3.13 3.13 0 0 1 3 3.88Z" />
     </svg>
-  )
+  );
 }
 
 function ZapIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
@@ -466,5 +451,5 @@ function ZapIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
     >
       <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" />
     </svg>
-  )
+  );
 }
