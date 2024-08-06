@@ -35,9 +35,6 @@ export const CardTitle = ({ ...props }) => {
   return (
     <>
       <span className={styles.container[main]} {...props}></span>
-      <span className="text-xs">
-        por <u>carlos baptists</u>
-      </span>
     </>
   );
 };

@@ -22,9 +22,12 @@ model Helper {
 model Card {
   id     String @id @default(cuid())
   title  String
+  icon   String
   author String
 
   description String
+
+  link String
 
   topics Topic[]
 

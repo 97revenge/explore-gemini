@@ -1,5 +1,7 @@
 "use client";
 
+import { Badge } from "@/components/ui/badge";
+
 import Link from "next/link";
 import {
   Card,
@@ -41,11 +43,30 @@ import { IntroParagraph } from "../Paragraph/IntroParagraph";
 import { CardTopic } from "../Topics/CardTopic";
 import { PrimaryCard } from "../Cards/PrimaryCard";
 import { CardTitle } from "../Titles/CardTitle";
-import { SVGProps } from "react";
+import { SVGProps, useEffect, useState, useTransition } from "react";
 import { IceBreaker } from "./ice-breaker";
+import { cardType } from "@/lib/types";
+import { z } from "zod";
+import Marquee from "../magicui/marquee";
+import FadeDown from "../Animations/FadeDown";
+import { AllThemeLoader } from "../Loaders/AllThemeLoader";
+import { TriggerChat } from "./trigger-chat";
 
 export function LandingContainer() {
   const { theme, switchTheme } = useThemeContext();
+  const [card, setCard] = useState<Array<any>>([]);
+
+  const [isPending, startTransition] = useTransition();
+
+  useEffect(() => {
+    startTransition(async () => {
+      const response = await fetch("/api/card");
+      const data = await response.json();
+      setCard(data);
+
+      return data;
+    });
+  }, [theme]);
 
   return (
     <Container>
@@ -112,54 +133,103 @@ export function LandingContainer() {
                 habilidades
               </IntroParagraph>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <div className="w-full max-w-[350px]">
-                <PrimaryCard>
-                  <CardHeader>
-                    <PhMathOperationsDuotone />
-                    <CardTitle>Matemática</CardTitle>
-                    <CardDescription>
-                      <CardTopic>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Soluta minus illo quae, voluptate veniam ex a aliquam.
-                        Perspiciatis nesciunt delectus debitis alias neque
-                        dolorem culpa perferendis, soluta placeat rem ipsa!
-                      </CardTopic>
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-2 mb-4 text-muted-foreground ">
-                      <div className="flex items-center gap-2">
-                        <CheckIcon className="inline-block h-4 w-6 text-themes current fill text-green-400  " />
-                        <CardTopic>
-                          Lorem ipsum dolor sit amet consectetur adipisicing
-                          elit.
-                        </CardTopic>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <CheckIcon className="inline-block h-4 w-6 text-themes current fill text-green-400  " />
-                        <CardTopic>
-                          Lorem ipsum dolor sit amet consectetur adipisicing
-                          elit.
-                        </CardTopic>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <CheckIcon className="inline-block h-4 w-6 text-themes current fill text-green-400  " />
-                        <CardTopic>
-                          Lorem ipsum dolor sit amet consectetur adipisicing
-                          elit.
-                        </CardTopic>
-                      </div>
+            {isPending ? (
+              <>
+                <div className="w-full h-[400px] flex items-center justify-center  min-h-[500px]:">
+                  <AllThemeLoader />
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-4   gap-6 min-h-[450px]  min-w-full flex items-center justify-center ">
+                  <div className="flex items-center justify-center">
+                    <div className="w-full max-w-[450px]   ">
+                      {card.map((item) => {
+                        const MaterialSymbolsBookmarkCheck: any = (
+                          props: SVGProps<SVGSVGElement>
+                        ) => {
+                          return (
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="1em"
+                              height="1em"
+                              viewBox="0 0 24 24"
+                              {...props}
+                            >
+                              <path
+                                fill="currentColor"
+                                d="m10.95 14l4.95-4.95l-1.425-1.4l-3.525 3.525L9.525 9.75L8.1 11.175zM5 21V5q0-.825.588-1.412T7 3h10q.825 0 1.413.588T19 5v16l-7-3z"
+                              ></path>
+                            </svg>
+                          );
+                        };
+
+                        const { topics } = item;
+                        const data: Array<any> = topics;
+                        return (
+                          <>
+                            <FadeDown>
+                              <PrimaryCard>
+                                <CardHeader>
+                                  <PhMathOperationsDuotone />
+                                  <CardTitle> {item.title}</CardTitle>
+                                  <span className="text-xs">
+                                    por <u>{item.author}</u>
+                                  </span>
+                                  <CardDescription>
+                                    <CardTopic>{item?.description}</CardTopic>
+                                  </CardDescription>
+                                </CardHeader>
+                                <CardContent>
+                                  <Marquee
+                                    pauseOnHover
+                                    vertical
+                                    className="[--duration:20s] max-h-[300px] "
+                                  >
+                                    <div className="space-y-2">
+                                      {data.map((item) => {
+                                        return (
+                                          <>
+                                            <Card className="flex items-center gap-2">
+                                              <div className="flex flex-col p-2 space-y-2 bg-gradient-to-r from-white to-blue-100 rounded-md shadow-md">
+                                                <div className="flex items-start w-auto ">
+                                                  <Badge
+                                                    variant={"outline"}
+                                                    className="space-x-2 border border-2 rounded-xl border-green-600"
+                                                  >
+                                                    <MaterialSymbolsBookmarkCheck className="current-fill text-green-600" />
+                                                    Categoria
+                                                  </Badge>
+                                                </div>
+                                                <CardTopic>
+                                                  <div className="p-1 bg-white bg-opacity-60 shadow-xs rounded-xl">
+                                                    {item.content}
+                                                  </div>
+                                                </CardTopic>
+                                              </div>
+                                            </Card>
+                                          </>
+                                        );
+                                      })}
+                                    </div>
+                                  </Marquee>
+                                </CardContent>
+                                <CardFooter>
+                                  <TriggerChat />
+                                </CardFooter>
+                              </PrimaryCard>
+                            </FadeDown>
+                          </>
+                        );
+                      })}
                     </div>
-                  </CardContent>
-                  <CardFooter>
-                    <Button size="sm">Learn More</Button>
-                  </CardFooter>
-                </PrimaryCard>
-              </div>
-            </div>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         </section>
+
         <section className="w-full py-12 md:py-24 lg:py-32 bg-muted">
           <div className="container px-4 md:px-6 space-y-8">
             <div className="text-center space-y-4">

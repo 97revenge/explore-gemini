@@ -8,7 +8,7 @@ import { callBackTheme, StylesSet } from "@/lib/themes/callbackTheme";
 export const styles: StylesSet = {
   container: {
     vanilla: callBackTheme(
-      "transition-all transition-colors shadow-md  hover:shadow-lg transition-shadow rounded-xl"
+      "transition-all transition-colors shadow-md  hover:shadow-lg transition-shadow rounded-xl max-h-[700px]"
     ),
     midnight: callBackTheme(
       "transition-all transition-colors shadow-md  hover:shadow-lg transition-shadow rounded-xl"
